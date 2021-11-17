@@ -7,3 +7,9 @@
 # NOTE: For upgrades - like the uninstall script, this script always runs from 
 #  the currently installed version, not from the new upgraded package version.
 
+$ACMEInstallLocation = ${ENV:ProgramFiles(x86)} + "\ACMEPro2011"
+$ACMEExes = Get-ChildItem -Path $ACMEInstallLocation "*.exe"
+Foreach ($acmeproc in $ACMEExes) {
+   
+    Stop-Process -Name ([System.IO.Path]::GetFileNameWithoutExtension($acmeproc)) -Force -ErrorAction SilentlyContinue
+}
